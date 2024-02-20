@@ -8,7 +8,7 @@ order: 1
 {% if page.url != "/feed.xml" 
 and page.url != "/assets/css/style.css" 
 and  page.url != "/"  
-and page.url != "/presentation.html" and page.url != "Backlog/backlog.html" %}
+and page.url != "/presentation.html" %}
 
 <!-- page.content | markdownify -->
 {{page.content }}
