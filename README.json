@@ -24,6 +24,10 @@
             {
                 "Titre":"/docs/rapport",
                 "lien":"https://labs-web.github.io/lab-heritage/rapport.html"
+            },
+            {
+                "Titre":"/docs/presentation",
+                "lien":"https://labs-web.github.io/lab-heritage/presentation.html"
             }
         ]
     },   

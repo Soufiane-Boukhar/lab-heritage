@@ -1,0 +1,65 @@
+
+:root {
+    --r-background-color: #fff;
+    --r-main-font: Source Sans Pro, Helvetica, sans-serif;
+    --r-main-font-size: 42px;
+    --r-main-color: #222;
+    --r-block-margin: 20px;
+    --r-heading-margin: 0 0 20px 0;
+    --r-heading-font: Source Sans Pro, Helvetica, sans-serif;
+    --r-heading-color: #222;
+    --r-heading-line-height: 1.2;
+    --r-heading-letter-spacing: normal;
+    --r-heading-text-transform: uppercase;
+    --r-heading-text-shadow: none;
+    --r-heading-font-weight: 600;
+    --r-heading1-text-shadow: none;
+    --r-heading1-size: 2.5em;
+    --r-heading2-size: 1.0em;
+    --r-heading3-size: 1.3em;
+    --r-heading4-size: 1em;
+    --r-code-font: monospace;
+    --r-link-color: #2a76dd;
+    --r-link-color-dark: #1a53a1;
+    --r-link-color-hover: #6ca0e8;
+    --r-selection-background-color: #98bdef;
+    --r-selection-color: #fff;
+    --r-overlay-element-bg-color: 0, 0, 0;
+    --r-overlay-element-fg-color: 240, 240, 240;
+  }
+
+ .reveal h1 {
+   background-color: #00838F;
+   padding: 10px;
+   color: #fff;
+ }
+ 
+ .reveal h2 {
+   background-color: #00838F;
+   padding: 10px;
+   color: #fff;
+ }
+ 
+ .reveal ul{
+   display: flex;
+   justify-content: flex-start;
+ }
+ .reveal li {
+   margin-top: 10%;
+   text-align: start;
+   list-style-image: url('../../../../images/icons.png');
+ }
+
+ .reveal li a{
+    font-size: 30px;
+ }
+ 
+ .reveal p{
+   text-align: start;
+   font-size: 17px;
+ }
+ 
+ .reveal img{
+   margin-left: 3%;
+ }
+ 
