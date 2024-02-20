@@ -1,7 +1,8 @@
 # backlog
 
-- Base de donne
 - Backend
+- Jeux de test
+- unit-test
 - Front-end
 - Rapport
 - Presentation
