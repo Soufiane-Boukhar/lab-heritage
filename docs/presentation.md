@@ -11,7 +11,7 @@ and  page.url != "/"
 and page.url != "/presentation.html" page.url != "/backlog/Backlog.html" %}
 
 <!-- page.content | markdownify -->
-{{page.url }}
+{{page.content }}
 
 {% endif %}
 {% endfor %}
