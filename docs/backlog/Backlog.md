@@ -24,6 +24,9 @@ order: 2
   - Front-end
     - front-end.md
     - images
+  - Compétences cibles
+    - compétences-cibles.md
+    - images
   - Conclusion
     - Images
     - Conclusion.md
