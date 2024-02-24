@@ -16,6 +16,9 @@ class ClientRepositorie extends BaseRepositorie
     }
     
     public function searchClient($search){
-        return Client::where('nom', 'like', '%' . $search . '%')->orWhere('prenom', 'like', '%' . $search . '%')->paginate();
+        return Client::where('type', 'Client')->where(function($query) use ($search) {
+            $query->where('nom', 'like', '%' . $search . '%')
+                  ->orWhere('prenom', 'like', '%' . $search . '%');
+        })->paginate();
     }
 }

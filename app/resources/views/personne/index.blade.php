@@ -53,9 +53,13 @@
 <script>
     $(document).ready(function() {
     function fetch_data(page, search) {
+
+    var type = '<?php echo $type; ?>';
+
+    console.log(type);
     
     $.ajax({
-        url: "/?page=" + page + "&query=" + search.trim(),
+        url: '/' + type + '?page=' + page + '&query=' + search.trim(),
         success: function(data) {
            
             var newData = $(data);

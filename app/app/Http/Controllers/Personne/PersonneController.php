@@ -21,30 +21,22 @@ class PersonneController extends Controller
     public function index(Request $request)
     {
         $type = $this->getTypeFromRoute($request->route()->getName());
-
-        $personnes = [];
-
-        if ($type === 'membre') {
-            $personnes = $this->membreRepositorie->paginate();
-        } elseif ($type === 'client') {
-            $personnes = $this->clientRepositorie->paginate();
-        }
-
+        $repository = $type . 'Repositorie';
+        $personnes = $this->{$repository}->paginate();
+        
         if ($request->ajax()) {
             $searchQuery = $request->get('query');
             if (!empty($searchQuery)) {
                 $searchQuery = str_replace(" ", "%", $searchQuery);
-                if ($type === 'membre') {
-                    $personnes = $this->membreRepositorie->searchMembre($searchQuery);
-                } elseif ($type === 'client') {
-                    $personnes = $this->clientRepositorie->searchClient($searchQuery);
-                }
-                return view('personne.index', $personnes)->render();
+                $methodName = 'search' . ucfirst($type);
+                $personnes = $this->{$type . 'Repositorie'}->{$methodName}($searchQuery);
+                return view('personne.index', compact('personnes', 'type'))->render();
             }
         }
 
-        return view('personne.index',compact('personnes','type'));
+        return view('personne.index', compact('personnes', 'type'));
     }
+
 
     public function create(Request $request)
     {
@@ -56,33 +48,24 @@ class PersonneController extends Controller
     {
         $data = $request->all();
         $type = $this->getTypeFromRoute($request->route()->getName());
-        if ($type === 'membre') {
-            $personne = $this->membreRepositorie->create($data);
-        } elseif ($type === 'client') {
-            $personne = $this->clientRepositorie->create($data);
-        }
+        $repository = $type . 'Repositorie';
+        $personne = $this->{$repository}->create($data);
         return redirect()->route($type.'.index')->with('success', $type.' a été ajoutée avec succès');
     }
 
     public function show(Request $request, $id)
     {
         $type = $this->getTypeFromRoute($request->route()->getName());
-        if ($type === 'membre') {
-            $personne = $this->membreRepositorie->find($id);
-        } elseif ($type === 'client') {
-            $personne = $this->clientRepositorie->find($id);
-        }
+        $repository = $type . 'Repositorie';
+        $personne = $this->{$repository}->find($id);
         return view('personne.show', compact('personne'))->with('type', $type);
     }
 
     public function edit(Request $request ,$id)
     {
         $type = $this->getTypeFromRoute($request->route()->getName());
-        if ($type === 'membre') {
-            $personne = $this->membreRepositorie->find($id);
-        } elseif ($type === 'client') {
-            $personne = $this->clientRepositorie->find($id);
-        }
+        $repository = $type . 'Repositorie';
+        $personne = $this->{$repository}->find($id);
         return view('personne.edit', compact('personne','type'));
     }
 
@@ -90,22 +73,16 @@ class PersonneController extends Controller
     {
         $data = $request->all();
         $type = $this->getTypeFromRoute($request->route()->getName());
-        if ($type === 'membre') {
-            $personne = $this->membreRepositorie->update($id, $data);
-        } elseif ($type === 'client') {
-            $personne = $this->clientRepositorie->update($id, $data);
-        }
+        $repository = $type . 'Repositorie';
+        $personne = $this->{$repository}->update($id, $data);
         return back()->with('success', $type.' a été modifiée avec succès');
     }
 
     public function delete(Request $request ,$id)
     {
         $type = $this->getTypeFromRoute($request->route()->getName());
-        if ($type === 'membre') {
-            $personne = $this->membreRepositorie->delete($id);
-        } elseif ($type === 'client') {
-            $personne = $this->clientRepositorie->delete($id);
-        }
+        $repository = $type . 'Repositorie';
+        $personne = $this->{$repository}->delete($id);
         return redirect()->route($type.'.index')->with('success', $type.' a été supprimée avec succès');
     }
 
