@@ -10,16 +10,16 @@
         </tr>
     </thead>
     <tbody id="membre-table">
-        @foreach ($membres as $item)
+        @foreach ($personnes as $item)
             <tr>
                 <td>{{$item->nom}}</td>
                 <td>{{$item->prenom}}</td>
                 <td>{{$item->email}}</td>
                 <td>{{$item->type}}</td>
                 <td class="d-flex justify-content-center">
-                    <a href="{{ route('membre.edit', $item->id) }}" class="btn btn-sm btn-default"><i
+                    <a href="{{ route($type.'.edit', $item->id) }}" class="btn btn-sm btn-default"><i
                             class="fa-solid fa-pen-to-square"></i></a>
-                            <form action="{{ route('membre.delete', $item->id) }}" class="ml-2" method="post">
+                            <form action="{{ route($type.'.delete', $item->id) }}" class="ml-2" method="post">
                                 @csrf
                                 @method('delete')
                                 <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete(this.form)"><i
@@ -34,6 +34,6 @@
 </div>
 <div class="card-footer clearfix mb-2 mr-5">
     <ul class="pagination  m-0 float-right">
-        {{$membres->links()}}
+        {{$personnes->links()}}
     </ul>
 </div>

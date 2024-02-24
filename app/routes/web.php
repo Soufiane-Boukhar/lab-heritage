@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Membre\MembreController;
+use App\Http\Controllers\Personne\PersonneController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +15,23 @@ use App\Http\Controllers\Membre\MembreController;
 |
 */
 
-Route::get('/',[MembreController::class, 'index'])->name('membre.index');
-Route::get('/membre/form-ajouter',[MembreController::class, 'create'])->name('membre.create');
-Route::post('/membre/ajouter',[MembreController::class, 'store'])->name('membre.store');
-Route::get('/membre/{id}',[MembreController::class, 'show'])->name('membre.show');
-Route::get('/membre/{id}/edit',[MembreController::class, 'edit'])->name('membre.edit');
-Route::post('/membre/{id}/update',[MembreController::class, 'update'])->name('membre.update');
-Route::DELETE('/membre/{id}/delete',[MembreController::class, 'delete'])->name('membre.delete');
+
+Route::prefix('membre')->group(function () {
+    Route::get('/', [PersonneController::class, 'index'])->name('membre.index');
+    Route::get('/form-ajouter', [PersonneController::class, 'create'])->name('membre.create');
+    Route::post('/ajouter', [PersonneController::class, 'store'])->name('membre.store');
+    Route::get('/{id}', [PersonneController::class, 'show'])->name('membre.show');
+    Route::get('/{id}/edit', [PersonneController::class, 'edit'])->name('membre.edit');
+    Route::post('/{id}/update', [PersonneController::class, 'update'])->name('membre.update');
+    Route::delete('/{id}/delete', [PersonneController::class, 'delete'])->name('membre.delete');
+});
+
+Route::prefix('client')->group(function () {
+    Route::get('/', [PersonneController::class, 'index'])->name('client.index');
+    Route::get('/form-ajouter', [PersonneController::class, 'create'])->name('client.create');
+    Route::post('/ajouter', [PersonneController::class, 'store'])->name('client.store');
+    Route::get('/{id}', [PersonneController::class, 'show'])->name('client.show');
+    Route::get('/{id}/edit', [PersonneController::class, 'edit'])->name('client.edit');
+    Route::post('/{id}/update', [PersonneController::class, 'update'])->name('client.update');
+    Route::delete('/{id}/delete', [PersonneController::class, 'delete'])->name('client.delete');
+});

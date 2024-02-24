@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Ajouter un membre</h1>
+                <h1>Ajouter un {{$type}}</h1>
             </div>
         </div>
     </div>
@@ -18,17 +18,17 @@
 
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Ajouter membre</h3>
+                    <h3 class="card-title">Ajouter {{$type}}</h3>
                 </div>
-                <form action="{{ route('membre.store') }}" method="POST">
+                <form action="{{ route($type.'.store') }}" method="POST">
                     @csrf
                     @method('POST')
                     <div class="card-body">
-                        @include('membre.fields')
+                        @include('personne.fields')
                     </div>
 
                     <div class="card-footer">
-                        <a href="{{ route('membre.index') }}" class="btn btn-default">Cancel</a>
+                        <a href="{{ route($type.'.index') }}" class="btn btn-default">Cancel</a>
                         <button type="submit" class="btn btn-primary">Ajouter</button>
                     </div>
                 </form>

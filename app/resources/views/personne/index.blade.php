@@ -11,11 +11,11 @@
 
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>La liste des membres</h1>
+                <h1>La liste des {{$type}}s</h1>
             </div>
             <div class="col-sm-6">
                 <div class="float-sm-right">
-                    <a href="{{ route('membre.create') }}" class="btn btnAdd">Ajouter</a>
+                    <a href="{{ route($type.'.create') }}" class="btn btnAdd">Ajouter</a>
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                     </div>
-                    @include('membre.table')
+                    @include('personne.table')
                 </div>
 
             </div>

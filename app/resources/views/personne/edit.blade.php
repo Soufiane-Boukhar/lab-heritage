@@ -12,7 +12,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Membre {{$membre->nom}} {{$membre->prenom}}</h1>
+                <h1>{{$type}} {{$personne->nom}} {{$personne->prenom}}</h1>
             </div>
         </div>
     </div>
@@ -25,13 +25,13 @@
 
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Editer membre</h3>
+                    <h3 class="card-title">Editer {{$type}}</h3>
                 </div>
-                <form action="{{ route('membre.update', $membre->id) }}" method="post">
+                <form action="{{ route($type.'.update', $personne->id) }}" method="post">
                     @csrf
                     @method('post')
                     <div class="card-body">
-                        @include('membre.fields')
+                        @include('personne.fields')
                     </div>
 
                     <div class="card-footer">

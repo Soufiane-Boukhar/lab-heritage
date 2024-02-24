@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="{{ route('membre.index') }}" class="brand-link">
-        <span class="brand-text font-weight-light">Gestion des membres</span>
+        <span class="brand-text font-weight-light">Gestion des personnes</span>
     </a>
 
     <div class="sidebar">

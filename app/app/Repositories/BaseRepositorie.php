@@ -14,9 +14,17 @@ class BaseRepositorie implements RepositorieInterface
         $this->model = $model;
     }
 
-    public function paginate(){
-        return $this->model->paginate(3);
+    public function paginate($perPage = 3, $type = null){
+        $query = $this->model->query();
+        
+        if ($type !== null) {
+            $query->where('type', $type);
+        }
+    
+        return $query->paginate($perPage);
     }
+    
+    
 
     public function find($id){
         return $this->model->find($id);
