@@ -9,6 +9,6 @@
 
 ## Références 
 
-- [Rapport](https://labs-web.github.io/lab-heritage/) 
-- [Presentation](https://labs-web.github.io/lab-heritage/presentation.html)
+- [Rapport](https://soufiane-boukhar.github.io/lab-heritage/) 
+- [Presentation](https://soufiane-boukhar.github.io/lab-heritage/presentation.html)
 
