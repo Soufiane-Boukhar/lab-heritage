@@ -46,5 +46,12 @@ php artisan make:controllers MembreController
 
 <!-- new slide -->
 
+## Diagramme de class 
+
+![Diagramme de class](./images/diagram.png){:width="500px" }
+*Diagramme de class*
+
+<!-- new slide -->
+
 
 

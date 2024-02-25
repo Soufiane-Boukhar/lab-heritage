@@ -25,6 +25,7 @@ Pour créer un fichier de test pour le modèle Membre uniquement, suivons ces é
 ```bash
 # Pour ajouter un test
 php artisan make:test MembreTest
+php artisan make:test ClientTest
 
 # Pour exécutez vos tests
 php artisan test

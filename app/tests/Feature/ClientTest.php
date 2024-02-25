@@ -5,22 +5,22 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use App\Repositories\personne\MembreRepositorie;
-use App\Models\Membre;
+use App\Repositories\personne\ClientRepositorie;
+use App\Models\Client;
 
-class MembreTest extends TestCase
+class ClientTest extends TestCase
 {
     use DatabaseTransactions;
 
     public function test_index(): void
     {
-        $response = new MembreRepositorie(new Membre);
+        $response = new ClientRepositorie(new Client);
         $response->paginate();
         $this->assertNotNull($response);
     }
 
     public function test_store(): void{
-        $response = new MembreRepositorie(new Membre);
+        $response = new ClientRepositorie(new Client);
         $now = \Carbon\Carbon::now();
         $input = [
             'nom' => 'Ahlam',
@@ -35,13 +35,13 @@ class MembreTest extends TestCase
 
 
     public function test_edit(): void{
-        $response = new MembreRepositorie(new Membre);
+        $response = new ClientRepositorie(new Client);
         $response->find(1);
         $this->assertNotNull($response);
     }
 
     public function test_update(): void{
-        $response = new MembreRepositorie(new Membre);
+        $response = new ClientRepositorie(new Client);
         $now = \Carbon\Carbon::now();
         $input = [
             'nom' => 'Ahlam',
@@ -51,25 +51,25 @@ class MembreTest extends TestCase
             'updated_at' => $now,
         ];
 
-        $membre = Membre::create($input);
+        $Client = Client::create($input);
 
-        $response->find($membre->id);
+        $response->find($Client->id);
         
         $inputUpdate = [
             'email' => 'ahlam2024@gmail.com' 
         ];
-        $response->update($membre->id,$inputUpdate);
+        $response->update($Client->id,$inputUpdate);
         $this->assertDatabaseHas('personnes', $inputUpdate);
     }
 
     public function test_show(): void{
-        $response = new MembreRepositorie(new Membre);
+        $response = new ClientRepositorie(new Client);
         $response->find(1);
         $this->assertNotNull($response);
     }
 
     public function test_delete(): void{
-        $response = new MembreRepositorie(new Membre);
+        $response = new ClientRepositorie(new Client);
         $now = \Carbon\Carbon::now();
         $input = [
             'nom' => 'Ahlam',
@@ -79,17 +79,17 @@ class MembreTest extends TestCase
             'updated_at' => $now,
         ];
 
-        $membre = Membre::create($input);
-        $response->find($membre->id);
+        $Client = Client::create($input);
+        $response->find($Client->id);
         $this->assertNotNull($response);
-        $response->delete($membre->id);
+        $response->delete($Client->id);
         $this->assertDatabaseMissing('personnes', $input);
     }
 
     public function test_search(): void{
-        $response = new MembreRepositorie(new Membre);
+        $response = new ClientRepositorie(new Client);
         $input = 'a';
-        $response->searchMembre($input);
+        $response->searchClient($input);
         $this->assertNotNull($response);
     }
 }
