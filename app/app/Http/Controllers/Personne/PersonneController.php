@@ -81,12 +81,6 @@ class PersonneController extends Controller
         return redirect()->route($type.'.index')->with('success', $type.' a été supprimée avec succès');
     }
 
-    private function getTypeFromRoute($routeName)
-    {
-        $parts = explode('.', $routeName);
-        return $parts[0];
-    }
-
     private function getRepositorie(){
         $route = Route::getCurrentRoute()->getName();
         $type = explode('.',$route);
