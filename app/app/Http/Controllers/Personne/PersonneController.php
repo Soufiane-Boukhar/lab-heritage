@@ -28,7 +28,7 @@ class PersonneController extends Controller
             if (!empty($searchQuery)) {
                 $searchQuery = str_replace(" ", "%", $searchQuery);
                 $methodName = 'search' . ucfirst($type);
-                $personnes = $this->{$type . 'Repositorie'}->{$methodName}($searchQuery);
+                $personnes = $this->getRepositorie()->{$methodName}($searchQuery);
                 
                 return view('personne.index', compact('personnes', 'type'))->render();
             }
