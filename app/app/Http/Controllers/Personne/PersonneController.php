@@ -4,32 +4,31 @@ namespace App\Http\Controllers\Personne;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Repositories\personne\MembreRepositorie;
 use App\Repositories\personne\ClientRepositorie;
+use Illuminate\Support\Str;
+use App\Models\Membre;
+use Illuminate\Support\Facades\Route;
+
+
 
 class PersonneController extends Controller
 {
-    protected $membreRepositorie;
-    protected $clientRepositorie;
+    // protected $membreRepositorie;
+    // protected $clientRepositorie;
 
-    public function __construct(MembreRepositorie $membreRepositorie, ClientRepositorie $clientRepositorie)
-    {
-        $this->membreRepositorie = $membreRepositorie;
-        $this->clientRepositorie = $clientRepositorie;
-    }
-
+   
     public function index(Request $request)
     {
-        $type = $this->getTypeFromRoute($request->route()->getName());
-        $repository = $type . 'Repositorie';
-        $personnes = $this->{$repository}->paginate();
         
+        $personnes = $this->getRepositorie()->paginate();
+        $type = $this->getType();
         if ($request->ajax()) {
             $searchQuery = $request->get('query');
             if (!empty($searchQuery)) {
                 $searchQuery = str_replace(" ", "%", $searchQuery);
                 $methodName = 'search' . ucfirst($type);
                 $personnes = $this->{$type . 'Repositorie'}->{$methodName}($searchQuery);
+                
                 return view('personne.index', compact('personnes', 'type'))->render();
             }
         }
@@ -38,51 +37,46 @@ class PersonneController extends Controller
     }
 
 
-    public function create(Request $request)
+    public function create()
     {
-        $type = $this->getTypeFromRoute($request->route()->getName());
+        $type = $this->getType();
         return view('personne.create',compact('type'));
     }
 
     public function store(Request $request)
     {
         $data = $request->all();
-        $type = $this->getTypeFromRoute($request->route()->getName());
-        $repository = $type . 'Repositorie';
-        $personne = $this->{$repository}->create($data);
+        $type = $this->getType();
+        $personne =  $this->getRepositorie()->create($data);
         return redirect()->route($type.'.index')->with('success', $type.' a été ajoutée avec succès');
     }
 
-    public function show(Request $request, $id)
+    public function show($id)
     {
-        $type = $this->getTypeFromRoute($request->route()->getName());
-        $repository = $type . 'Repositorie';
-        $personne = $this->{$repository}->find($id);
+        $type = $this->getType();
+        $personne = $this->getRepositorie()->find($id);
         return view('personne.show', compact('personne'))->with('type', $type);
     }
 
-    public function edit(Request $request ,$id)
+    public function edit($id)
     {
-        $type = $this->getTypeFromRoute($request->route()->getName());
-        $repository = $type . 'Repositorie';
-        $personne = $this->{$repository}->find($id);
+        $type = $this->getType();
+        $personne = $this->getRepositorie()->find($id);
         return view('personne.edit', compact('personne','type'));
     }
 
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $type = $this->getTypeFromRoute($request->route()->getName());
-        $repository = $type . 'Repositorie';
-        $personne = $this->{$repository}->update($id, $data);
+        $type = $this->getType();
+        $personne = $this->getRepositorie()->update($id, $data);
         return back()->with('success', $type.' a été modifiée avec succès');
     }
 
     public function delete(Request $request ,$id)
     {
-        $type = $this->getTypeFromRoute($request->route()->getName());
-        $repository = $type . 'Repositorie';
-        $personne = $this->{$repository}->delete($id);
+        $type = $this->getType();
+        $personne = $this->getRepositorie()->delete($id);
         return redirect()->route($type.'.index')->with('success', $type.' a été supprimée avec succès');
     }
 
@@ -90,5 +84,21 @@ class PersonneController extends Controller
     {
         $parts = explode('.', $routeName);
         return $parts[0];
+    }
+
+    private function getRepositorie(){
+        $route = Route::getCurrentRoute()->getName();
+        $type = explode('.',$route);
+        $model = str::ucfirst($type[0]);
+        $modelRepository = $model.'Repositorie';
+        $path = "\\App\\Repositories\\personne\\".$modelRepository;
+        $repository = new $path(new Membre);
+        return $repository;
+    }
+
+    private function getType(){
+        $route = Route::getCurrentRoute()->getName();
+        $type = explode('.',$route);
+        return $type[0];
     }
 }
