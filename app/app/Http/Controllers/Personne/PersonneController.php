@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Repositories\personne\ClientRepositorie;
 use Illuminate\Support\Str;
 use App\Models\Membre;
+use App\Models\Client;
 use Illuminate\Support\Facades\Route;
 
 
@@ -92,7 +93,12 @@ class PersonneController extends Controller
         $model = str::ucfirst($type[0]);
         $modelRepository = $model.'Repositorie';
         $path = "\\App\\Repositories\\personne\\".$modelRepository;
-        $repository = new $path(new Membre);
+
+        if($model === 'Membre'){
+            $repository = new $path(new Membre);
+        }elseif($model === 'Client'){
+            $repository = new $path(new Client);
+        }
         return $repository;
     }
 
