@@ -6,12 +6,19 @@ order: 3
 
 # Polymorphic
 
-![Polymorphic](./images/polymorphic.png){:width="500px" }
+![Polymorphic](./images/Polymorphism-in-PHP.jpg){:width="500px" }
 *Polymorphic*
 
 <!-- note -->
 
 La polymorphie en Laravel fait référence à la capacité d'un modèle à appartenir à plusieurs autres modèles sur une seule relation. Cela permet de créer des relations dynamiques entre les modèles, ce qui est particulièrement utile dans des situations où un modèle peut être associé à plusieurs autres modèles sans avoir à définir une relation spécifique pour chaque cas.
+
+<!-- new slide -->
+
+## Example
+
+![Example Polymorphic](./images/one-to-many-poly-relationship-laravel.webp){:width="500px" }
+*Example Polymorphic*
 
 <!-- new slide -->
 
