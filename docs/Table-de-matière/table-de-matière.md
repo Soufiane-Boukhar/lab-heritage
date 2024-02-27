@@ -16,8 +16,10 @@ order: 0
 - [Introduction](#introduction)
 - [Backlog](#backlog)
 - [Backend](#backend)
+- [Polymorphic](#polymorphic)
 - [Unit test](#unit-test)
 - [Front-end](#front-end)
+- [Compétences cibles](#compétences-cibles)
 - [Conclusion](#conclusion)
-  
+
 <!-- new slide -->
