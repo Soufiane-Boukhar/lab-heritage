@@ -1,7 +1,7 @@
 ---
 layout: default
 chapitre: Compétences cibles
-order: 7
+order: 6
 ---
 <!--  -->
 
